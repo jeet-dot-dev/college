@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// CREATE TABLE students (
+//   roll_no VARCHAR PRIMARY KEY,
+//   name VARCHAR NOT NULL,
+//   department VARCHAR NOT NULL,
+//   semester INTEGER NOT NULL
+// );
+
+// CREATE TABLE exam_routines (
+//   id SERIAL PRIMARY KEY,
+//   student_roll_no VARCHAR REFERENCES students(roll_no),
+//   day VARCHAR NOT NULL,
+//   subject VARCHAR NOT NULL,
+//   timings VARCHAR NOT NULL
+// );
+
+model Students {
+  roll_no  Int @id @default(autoincrement())
+  name String 
+  department String 
+  sem String
+  routines Rutine[]
+}
+
+model Rutine {
+   id String @id @default(uuid())
+   subject String 
+   day String 
+   time DateTime @default(now())
+   st_id Int
+   Student Students @relation(fields: [st_id],references: [roll_no])
+
+}

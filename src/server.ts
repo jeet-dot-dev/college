@@ -9,6 +9,7 @@ async function main() {
     const vector = await embadedText(row.rawText);
     const metadata = {
       roll_no: row.roll_no,
+      rawText : row.rawText
     };
     await saveEmbeddingToPinecones(
       JSON.stringify(row.roll_no),

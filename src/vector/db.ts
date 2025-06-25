@@ -1,8 +1,13 @@
 import { Pinecone } from "@pinecone-database/pinecone";
+import dotenv from "dotenv" ;
+
+dotenv.config();
 
 const pinecone = new Pinecone({
-    apiKey : process.env.VECTOR_API || "" ,
+    apiKey : process.env.PINECONE_API_KEY || "" ,
 })
+
+
 
 const index = pinecone.Index("student-routine");
 
